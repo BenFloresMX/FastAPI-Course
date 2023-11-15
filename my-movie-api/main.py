@@ -17,11 +17,11 @@ movies = [
 	},
         {
 		"id": 2,
-		"title": "Avatar",
-		"overview": "En un exuberante planeta llamado Pandora viven los Na'vi, seres que ...",
-		"year": "2009",
-		"rating": 7.8,
-		"category": "Acción"
+		"title": "Emoji: La Película",
+		"overview": "Todos los utilizan; de hecho, los emojis son casi imprescindibles ...",
+		"year": "2017",
+		"rating": 5.5,
+		"category": "Animación"
 	},
     {
 		"id": 3,
@@ -63,4 +63,22 @@ def create_movie(id: int = Body(), title: str= Body(), overview: str= Body(), ye
 		"rating": rating,
 		"category": category
           })
-	return movies 	
+	return movies
+
+@app.put('/movies/{id}', tags = ['movies'])
+def update_movie(id: int, title: str= Body(), overview: str= Body(), year: int= Body(), rating: float= Body(), category: str= Body()):
+	for item in movies:
+		if item["id"] == id:
+			item['title'] = title,
+			item['overview'] = overview,
+			item['year'] = year,
+			item['rating'] = rating,
+			return movies
+            
+@app.delete('/movies/{id}', tags = ['movies'])
+def delete_movie(id: int):
+	for item in movies:
+		if item["id"] == id:
+			movies.remove(item)
+			return movies
+		
